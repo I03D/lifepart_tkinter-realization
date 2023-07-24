@@ -21,7 +21,6 @@ root.overrideredirect(1)
 root.configure(bg='white')
 
 
-# Create a photoimage object of the image in the path
 image1 = Image.open("sun.png")
 test = ImageTk.PhotoImage(image1)
 

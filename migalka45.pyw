@@ -27,7 +27,6 @@ test = ImageTk.PhotoImage(image1)
 label1 = tkinter.Label(image=test, borderwidth=0)
 label1.image = test
 
-# Position image
 label1.place(x=sw/2-50, y=sh/2-50)
 
 countdown(0)

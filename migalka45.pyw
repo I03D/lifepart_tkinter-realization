@@ -4,8 +4,6 @@ from math import floor
 from tkinter import *
 from PIL import Image, ImageTk
 
-# Если сделать убирание окна по блокировке, будет только хуже.
-
 def countdown(time):
     if time == -1:
         root.quit()

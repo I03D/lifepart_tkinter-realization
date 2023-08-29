@@ -24,7 +24,8 @@ from PIL import Image, ImageTk
 
 import tkinter as tk
 
-subprocess.run(["python", "migalka45.pyw"])
+# subprocess.run(["python", "migalka45.pyw"])
+subprocess.run(["45.exe"])
 
 # os.system('cls')
 
@@ -126,7 +127,7 @@ def SEND():
     # T.insert("end", "debug: timer = "+str(timer)+"\n")
     # T.insert("end", "debug: time.time() = " + str(floor(time.time())) + "\n")
     
-    outputall=subprocess.check_output(callall)
+    outputall=subprocess.check_output(callall,shell=False)
     outputstringall=str(outputall)
     if process_name in outputstringall:
         if not locked:
@@ -139,11 +140,16 @@ def SEND():
         if locked:
             # print("Сессия разблокирована, время пошло.\n")
             T.insert("end", "Сессия разблокирована, время пошло.\n")
-        locked = False
+            big_timer_start = floor(time.time())
+            T.insert("end", "debug: big_timer_start = " + str(big_timer_start)+"\n")
+            small_timer_start = floor(time.time())
+            T.insert("end", "debug: small_timer_start = " + str(small_timer_start)+"\n")
+            locked = False
         
         timestamp = floor(time.time())
         big_timer = timestamp - big_timer_start
         small_timer = timestamp - small_timer_start
+
         # print("debug: timestamp = " + str(timestamp)+"\n")
         # print("debug: big_timer = " + str(big_timer)+"\n")
         # print("debug: small_timer = " + str(small_timer)+"\n")
@@ -154,17 +160,19 @@ def SEND():
             small_timer = 0
             small_timer_start = timestamp
             if big_timer >= 2700:
-                subprocess.run(["python", "migalka45.pyw"])
+                # subprocess.run(["python", "migalka45.pyw"])
+                subprocess.run(["45.exe"])
                 if big_timer < 3000:
                     # print("Пора сделать 15-минутный перерыв.\n")
                     T.insert("end", "Пора сделать 15-минутный перерыв.\n")
                 else:
                     # print("Пора сделать хотя бы 15-минутный перерыв.\n")
                     T.insert("end", "Пора сделать хотя бы 15-минутный перерыв.\n")
-                # print("(Windows+L заблокирует сессию и сбросит таймер в течение 5 минут)\n")
+                # print("(Windows+L заблокирует сессию и сбросит таймер в течение "+config['settings']['update_frequency']/100+" секунд)\n")
                 T.insert("end", "(Windows+L заблокирует сессию и сбросит таймер в течение 5 минут)\n")
             else:
-                subprocess.run(["python", "migalka5.pyw"])
+                # subprocess.run(["python", "migalka5.pyw"])
+                subprocess.run(["5.exe"])
     T.see("end")
     root.after(config['settings']['update_frequency'], SEND)
 
